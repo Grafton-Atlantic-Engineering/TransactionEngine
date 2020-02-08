@@ -14,8 +14,7 @@ import java.util.Map;
  *    TODO: find hash function that produces a digest size & convert from hex to base32 so digest is 32 digits
  *     TODO: add linter */
 
-public class Transaction {
-
+public class DataManager {
     public static void main(String[] args) throws IOException {
     }
 
