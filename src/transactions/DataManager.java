@@ -50,7 +50,7 @@ public class DataManager {
         return dataMap;
     }
 
-    public Map<String, Person> getPersonMap(String fileName) throws IOException {
+    public static Map<String, Person> getPersonMap(String fileName) throws IOException {
         Map<String, String[]> dataRows = getDataRows(fileName);
         Map<String, Person> personMap = new HashMap<>();
         dataRows.forEach((accountNo, dataRow) -> {
