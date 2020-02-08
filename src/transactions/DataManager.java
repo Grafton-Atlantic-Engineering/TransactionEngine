@@ -49,4 +49,14 @@ public class DataManager {
         csvReader.close();
         return dataMap;
     }
+
+    public Map<String, Person> getPersonMap(String fileName) throws IOException {
+        Map<String, String[]> dataRows = getDataRows(fileName);
+        Map<String, Person> personMap = new HashMap<>();
+        dataRows.forEach((accountNo, dataRow) -> {
+            personMap.put(accountNo, new Person(dataRow));
+        });
+        return personMap;
+    }
+
 }
