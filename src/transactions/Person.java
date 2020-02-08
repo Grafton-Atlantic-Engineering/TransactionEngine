@@ -1,5 +1,6 @@
 package transactions;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class Person {
@@ -28,6 +29,15 @@ public class Person {
         this.City = paramList[6];
         this.State = paramList[7];
         this.Zip = paramList[8];
+        this.TransactionID = generateId();
+    }
+
+    public Person(Map<String, String> props) {
+        this.AccountName = props.getOrDefault("Account", "");
+        this.Company = props.getOrDefault("Company", "");
+        this.FirstName = props.getOrDefault("FirstName", "");
+        this.LastName = props.getOrDefault("LastName", "");
+        this.Address_1 = props.getOrDefault("Address_1", "");
     }
 
     public String getAccountName(){
@@ -102,7 +112,7 @@ public class Person {
         Zip = zip;
     }
 
-    private String generateId(){
+    private static String generateId(){
         UUID uuid = UUID.randomUUID();
         String tranId = uuid.toString();
         tranId = tranId.replaceAll("\\-","");

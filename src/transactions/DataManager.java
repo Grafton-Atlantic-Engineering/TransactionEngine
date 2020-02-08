@@ -1,12 +1,9 @@
 package transactions;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /* TODO: create CSV reader class
@@ -15,25 +12,21 @@ import java.util.Map;
  *     TODO: add linter */
 
 public class DataManager {
-    public static void main(String[] args) throws IOException {
-        String[] schema = getSchema("customers.csv");
-        Map<String, String[]> dataRows = getDataRows("customers.csv");
-        dataRows.forEach((account, data) -> {
-            for (int i = 0; i < schema.length; i++) {
-                System.out.println('\t' + schema[i] + ": " + data[i]);
-            }
-            System.out.println();
-        });
+
+    public String fileName;
+
+    public DataManager(String fileName) {
+        this.fileName = fileName;
     }
 
-    public static String[] getSchema(String fileName) throws IOException {
+    public String[] getSchema(String fileName) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
         String[] schema = csvReader.readLine().split(",", -1);
         csvReader.close();
         return schema;
     }
 
-    public static Map<String, String[]> getDataRows(String fileName) throws IOException {
+    protected Map<String, String[]> getDataRows(String fileName) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
         // just gets the schema
         csvReader.readLine();
@@ -50,7 +43,7 @@ public class DataManager {
         return dataMap;
     }
 
-    public static Map<String, Person> getPersonMap(String fileName) throws IOException {
+    public Map<String, Person> getPersonMap(String fileName) throws IOException {
         Map<String, String[]> dataRows = getDataRows(fileName);
         Map<String, Person> personMap = new HashMap<>();
         dataRows.forEach((accountNo, dataRow) -> {
@@ -58,5 +51,4 @@ public class DataManager {
         });
         return personMap;
     }
-
 }
