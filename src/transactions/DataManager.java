@@ -16,9 +16,17 @@ import java.util.Map;
 
 public class DataManager {
     public static void main(String[] args) throws IOException {
+        String[] schema = getSchema("customers.csv");
+        Map<String, String[]> dataRows = getDataRows("customers.csv");
+        dataRows.forEach((account, data) -> {
+            for (int i = 0; i < schema.length; i++) {
+                System.out.println('\t' + schema[i] + ": " + data[i]);
+            }
+            System.out.println();
+        });
     }
 
-    public String[] getSchema(String fileName) throws IOException {
+    public static String[] getSchema(String fileName) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
         String[] schema = csvReader.readLine().split(",", -1);
         csvReader.close();
