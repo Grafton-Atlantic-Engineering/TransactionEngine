@@ -1,10 +1,13 @@
 package transactions;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /* TODO: create CSV reader class
  *   TODO: add essential field specification for csv parser
@@ -14,19 +17,29 @@ import java.util.List;
 public class Transaction {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader("customers.csv"));
-        // set -1 so it captures all empty strings
-        String[] schema = csvReader.readLine().split(",", -1);
-        for (var title: schema) {
-            System.out.print(title + ", ");
-        }
+    }
 
-        List<String[]> dataRows = new ArrayList<String[]>();
+    public String[] getSchema(String fileName) throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
+        String[] schema = csvReader.readLine().split(",", -1);
+        csvReader.close();
+        return schema;
+    }
+
+    public static Map<String, String[]> getDataRows(String fileName) throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
+        // just gets the schema
+        csvReader.readLine();
+
+        Map<String, String[]> dataMap = new HashMap<>();
         String row;
         while((row = csvReader.readLine()) != null) {
             // catch the empty strings
-            dataRows.add(row.split(",", -1));
+            String[] dataRow = row.split(",", -1);
+            String accountNo = dataRow[0];
+            dataMap.put(accountNo, dataRow);
         }
         csvReader.close();
+        return dataMap;
     }
 }
