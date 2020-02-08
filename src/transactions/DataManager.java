@@ -19,15 +19,15 @@ public class DataManager {
         this.fileName = fileName;
     }
 
-    public String[] getSchema(String fileName) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
+    public String[] getSchema() throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         String[] schema = csvReader.readLine().split(",", -1);
         csvReader.close();
         return schema;
     }
 
-    protected Map<String, String[]> getDataRows(String fileName) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
+    protected Map<String, String[]> getDataRows() throws IOException {
+        BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         // just gets the schema
         csvReader.readLine();
 
@@ -43,8 +43,8 @@ public class DataManager {
         return dataMap;
     }
 
-    public Map<String, Person> getPersonMap(String fileName) throws IOException {
-        Map<String, String[]> dataRows = getDataRows(fileName);
+    public Map<String, Person> getPersonMap() throws IOException {
+        Map<String, String[]> dataRows = getDataRows();
         Map<String, Person> personMap = new HashMap<>();
         dataRows.forEach((accountNo, dataRow) -> {
             personMap.put(accountNo, new Person(dataRow));
