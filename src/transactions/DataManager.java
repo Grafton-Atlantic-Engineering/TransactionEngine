@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /* TODO: create CSV reader class
- *   TODO: add essential field specification for csv parser
- *    TODO: find hash function that produces a digest size & convert from hex to base32 so digest is 32 digits
- *     TODO: add linter */
+*  TODO: find hash function that produces a digest size & convert from hex to base32 so digest is 32 digits
+*  TODO: add linter
+*
+* */
 
 public class DataManager {
 
