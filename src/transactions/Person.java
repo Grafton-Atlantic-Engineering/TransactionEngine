@@ -2,11 +2,13 @@ package transactions;
 
 import java.util.Map;
 import java.util.UUID;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Person {
     private String AccountName, Company,FirstName,LastName,Address_1,Address_2,City,State,Zip,TransactionID;
 
-    public Person(String AccountName, String Company, String FirstName, String LastName, String Address_1, String Address_2, String City, String State, String Zip){
+    public Person(String AccountName, String Company, String FirstName, String LastName, String Address_1, String Address_2, String City, String State, String Zip) throws NoSuchAlgorithmException {
         this.AccountName = AccountName;
         this.Company = Company;
         this.FirstName = FirstName;
@@ -112,12 +114,20 @@ public class Person {
         Zip = zip;
     }
 
-    private static String generateId(){
+    // creates txid by hashing attributes with sha1
+    private String generateId() {
         UUID uuid = UUID.randomUUID();
-        String tranId = uuid.toString();
-        tranId = tranId.replaceAll("\\-","");
-        String tranIdReturned = tranId.substring(0,24);
-        return tranIdReturned;
+        String txid = null;
+        try {
+            txid = sha1(String.join("",
+                    this.AccountName, this.Company, this.FirstName, this.LastName,
+                    this.Address_1, this.Address_2, this.City, this.State, this.Zip,
+                    uuid.toString()
+            ));
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+        return txid.substring(0, 24);
     }
 
     public String toString(){
@@ -133,6 +143,16 @@ public class Person {
                         "Zip: " + Zip + "\n" +
                         "TransactionID: " + TransactionID + "\n"
         );
+    }
+
+    private static String sha1(String input) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA1");
+        byte[] byteDigest = digest.digest(input.getBytes());
+        StringBuffer buffer = new StringBuffer();
+        for (byte b : byteDigest) {
+            buffer.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        }
+        return buffer.toString();
     }
 }
 
