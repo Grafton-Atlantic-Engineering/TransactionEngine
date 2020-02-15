@@ -112,6 +112,10 @@ public class Person {
         Zip = zip;
     }
 
+    /**
+     * Generate's a unique 24 digit alphanumeric transaction ID for this Person
+     * @return String which is a 24 digit alphanumeric transaction ID
+     */
     private static String generateId(){
         UUID uuid = UUID.randomUUID();
         String tranId = uuid.toString();
@@ -120,18 +124,18 @@ public class Person {
         return tranIdReturned;
     }
 
+    @Override
     public String toString(){
-        return(
-                "Account: " + AccountName + "\n" +
-                        "Company: " + Company + "\n" +
-                        "First Name: " + FirstName + "\n" +
-                        "Last Name: " + LastName + "\n" +
-                        "Address 1: " + Address_1 + "\n" +
-                        "Address 2: " + Address_2 + "\n" +
-                        "City: " + City + "\n" +
-                        "State: " + State + "\n" +
-                        "Zip: " + Zip + "\n" +
-                        "TransactionID: " + TransactionID + "\n"
+        return ("Account: " + AccountName + "\n" +
+                    "Company: " + Company + "\n" +
+                    "First Name: " + FirstName + "\n" +
+                    "Last Name: " + LastName + "\n" +
+                    "Address 1: " + Address_1 + "\n" +
+                    "Address 2: " + Address_2 + "\n" +
+                    "City: " + City + "\n" +
+                    "State: " + State + "\n" +
+                    "Zip: " + Zip + "\n" +
+                    "TransactionID: " + TransactionID + "\n"
         );
     }
 }
