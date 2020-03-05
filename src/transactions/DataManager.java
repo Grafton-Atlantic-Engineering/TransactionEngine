@@ -10,11 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
- * TODO: create CSV reader class
- * TODO: add essential field specification for csv parser
- * TODO: find hash function that produces a digest size & convert from hex to base32 so digest is 32 digits
- * TODO: add linter
- */
+*  TODO: add linter
+*
+* */
 
 
 /**
@@ -43,6 +41,7 @@ public class DataManager {
         // Creates a buffer to read the first line of the CSV file
         BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         String[] schema = csvReader.readLine().split(",", -1);
+        LOGGER.info("read the schema: " + Arrays.toString(schema));
 
         // Close CSV reader to free up memory
         csvReader.close();
