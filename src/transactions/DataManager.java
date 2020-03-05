@@ -23,6 +23,8 @@ import java.util.logging.Logger;
  */
 public class DataManager {
 
+    private final static Logger LOGGER = Logger.getLogger(DataManager.class.getName());
+
     public String fileName;
 
     public DataManager(String fileName) {
