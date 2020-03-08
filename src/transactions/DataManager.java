@@ -3,8 +3,11 @@ package transactions;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * TODO: create CSV reader class
@@ -23,7 +26,10 @@ public class DataManager {
     public String fileName;
 
     public DataManager(String fileName) {
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.info("Initialized logger!");
         this.fileName = fileName;
+        LOGGER.info("Using file: " + this.fileName);
     }
 
     /**
@@ -51,7 +57,8 @@ public class DataManager {
         // Creates a buffer to read from the file line by line
         BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         // just gets the schema
-        csvReader.readLine();
+        String[] schema = csvReader.readLine().split(",", -1);
+
 
         // Creates a map to store the relation between account number to Person
         Map<String, Person> dataMap = new HashMap<>();
