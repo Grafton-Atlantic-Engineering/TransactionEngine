@@ -48,22 +48,25 @@ public class TransactionEngineTest {
         for(int i = 0; i < transactionIDs.length; i++) {
             //this checks to see if transactionIDs at index i is alpha numeric. If it's not it sets allAlphaNumeric
                 //to false
-            if(!(transactionIDs[i].matches("[a-zA-z0-9]+"))) {
+            if(!(transactionIDs[i].matches("[a-zA-Z0-9]+"))) {
                 allAlphaNumeric = false;
             }
             //this checks to see if transactionIDs at index i is 24 digits. If it's not it sets the all24Digits to false
             if(transactionIDs[i].length() != 24) {
                 all24Digits = false;
             }
+            //now check to see if all the transaction IDs are unique by comparing them to each other
             for(int j = i + 1; j < transactionIDs.length; j++) {
                 if(transactionIDs[i].equals(transactionIDs[j])) {
                     allUnique = false;
                 }
             }
         }
+        //if all of the transaction IDs are unique, alpha numeric, and 24 digits display this message
         if(allUnique && allAlphaNumeric && all24Digits) {
             System.out.println("All of the transaction IDs out of the 1000 created are unique, alpha numeric, and 24 digits.");
         }
+        //if not, check to see what issues there are
         else {
             if (!allUnique) {
                 System.out.println("Not all of the transaction IDs out of the 1000 created are unique.");
