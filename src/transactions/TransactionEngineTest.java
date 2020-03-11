@@ -2,6 +2,8 @@ package transactions;
 import java.io.IOException;
 import java.util.Map;
 import java.io.File;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * TransactionEngineTest is used to test both the generateID() method in the Person
@@ -9,7 +11,8 @@ import java.io.File;
  * and also the getSchema() and getPersonMap() methods in the DataManager class
  */
 public class TransactionEngineTest {
-    public static void main(String[] args) {
+    @Test
+    public void testTransactionGenerator() {
         //create a few Person objects to use while testing
         //this Person object will have every field filled to make sure that a transaction ID is created for a normal Person object
         Person person1 = new Person("1564afdaave74", "LLBean", "John", "Doe", "555 A Street", "Apartment 1", "Framingham", "Massachusetts", "01701");
@@ -24,59 +27,33 @@ public class TransactionEngineTest {
         Person person6 = new Person("01721aefdeesfe", "   ", null, "Parker", "", null, "Miami", "Florida", "");
 
         //here I test the generateID() method for the Person objects I've created by calling the
-            //getTransactionId() method which calls generateID() to make sure transaction IDs are created for people
-            //with null, empty strings, and white space for different fields
-        System.out.printf("Transaction ID for person 1: %s%n", person1.getTransactionId());
-        System.out.printf("Transaction ID for person 2: %s%n", person2.getTransactionId());
-        System.out.printf("Transaction ID for person 3: %s%n", person3.getTransactionId());
-        System.out.printf("Transaction ID for person 4: %s%n", person4.getTransactionId());
-        System.out.printf("Transaction ID for person 5: %s%n", person5.getTransactionId());
-        System.out.printf("Transaction ID for person 6: %s%n", person6.getTransactionId());
+        //getTransactionId() method which calls generateID() to make sure transaction IDs are created for people
+        //with null, empty strings, and white space for different fields
+        assertNotNull(person1.getTransactionId());
+        assertNotNull(person2.getTransactionId());
+        assertNotNull(person3.getTransactionId());
+        assertNotNull(person4.getTransactionId());
+        assertNotNull(person5.getTransactionId());
+        assertNotNull(person6.getTransactionId());
+    }
 
+    @Test
+    public void testUniquenessAndDigits() {
         //here I will generate 1000 transaction IDs for a Person object and store them in an array to make sure the
             //transaction IDs are all 24 digits, are alpha numeric, and are all unique
         String[] transactionIDs = new String[1000];
+        Person person2 = new Person("0000000011", "Hogwarts", "Ron", "Weesley", "4 Wizard Way", null, "London", null, null);
         for(int i = 0; i < transactionIDs.length; i++) {
             transactionIDs[i] = person2.getTransactionId();
         }
-        //this boolean will hold if all of the transaction IDs are unique or not
-        boolean allUnique = true;
-        //this boolean will hold if all of the transaction IDs are alpha numeric
-        boolean allAlphaNumeric = true;
-        //this boolean will hold if all of the transaction IDs are 24 digits
-        boolean all24Digits = true;
         for(int i = 0; i < transactionIDs.length; i++) {
-            //this checks to see if transactionIDs at index i is alpha numeric. If it's not it sets allAlphaNumeric
-                //to false
-            if(!(transactionIDs[i].matches("[a-zA-Z0-9]+"))) {
-                allAlphaNumeric = false;
-            }
-            //this checks to see if transactionIDs at index i is 24 digits. If it's not it sets the all24Digits to false
-            if(transactionIDs[i].length() != 24) {
-                all24Digits = false;
-            }
+            //this checks to see if the transactionID at index i is exactly 24 digits with alpha numeric characters
+            assertTrue((transactionIDs[i].matches("[a-zA-Z0-9]{24}")));
             //now check to see if all the transaction IDs are unique by comparing them to each other
             for(int j = i + 1; j < transactionIDs.length; j++) {
-                if(transactionIDs[i].equals(transactionIDs[j])) {
-                    allUnique = false;
-                }
-            }
-        }
-        //if all of the transaction IDs are unique, alpha numeric, and 24 digits display this message
-        if(allUnique && allAlphaNumeric && all24Digits) {
-            System.out.println("All of the transaction IDs out of the 1000 created are unique, alpha numeric, and 24 digits.");
-        }
-        //if not, check to see what issues there are
-        else {
-            if (!allUnique) {
-                System.out.println("Not all of the transaction IDs out of the 1000 created are unique.");
-            }
-            if (!allAlphaNumeric) {
-                System.out.println("Not all of the transaction IDs out of the 1000 created are alpha numeric.");
-            }
-            if (!all24Digits) {
-                System.out.println("Not all of the transaction IDs out of the 1000 created are 24 digits.");
+                assertNotEquals(transactionIDs[j], transactionIDs[i]);
             }
         }
     }
 }
+
