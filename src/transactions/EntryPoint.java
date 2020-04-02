@@ -2,23 +2,20 @@ package transactions;
 
 import java.io.IOException;
 import java.util.Map;
-import java.io.File;
 
 public class EntryPoint {
     public static void main(String[] args) {
-        // Gets the customers.csv file
-        String filePath = new File("customers.csv").getAbsolutePath();
-        DataManager dataManager = new DataManager(filePath);
-
-        // Wrap the map in a try catch block to catch any file reading errors
-        Map<String, Person> personMap;
+        DataManager data = new DataManager("customers.csv");
         try {
-            personMap = dataManager.getPersonMap();
-            personMap.forEach((accountNumber, person) -> {
-                System.out.println(person.toString());
+            String[] schema = data.getSchema();
+            System.out.println("Record: (" + String.join(", ", schema) + ")");
+            Map<String, Person> peopleData = data.getPersonMap();
+            peopleData.forEach((k, v) -> {
+                System.out.println(v);
             });
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
     }
 }
