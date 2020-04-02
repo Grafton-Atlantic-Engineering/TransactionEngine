@@ -42,8 +42,8 @@ public class TransactionEngineTest {
         //here I will generate 1000 transaction IDs for a Person object and store them in an array to make sure the
             //transaction IDs are all 24 digits, are alpha numeric, and are all unique
         String[] transactionIDs = new String[1000];
-        Person person2 = new Person("0000000011", "Hogwarts", "Ron", "Weesley", "4 Wizard Way", null, "London", null, null);
         for(int i = 0; i < transactionIDs.length; i++) {
+            Person person2 = new Person("0000000011", "Hogwarts", "Ron", "Weesley", "4 Wizard Way", null, "London", null, null);
             transactionIDs[i] = person2.getTransactionId();
         }
         for(int i = 0; i < transactionIDs.length; i++) {
@@ -51,7 +51,7 @@ public class TransactionEngineTest {
             assertTrue((transactionIDs[i].matches("[a-zA-Z0-9]{24}")));
             //now check to see if all the transaction IDs are unique by comparing them to each other
             for(int j = i + 1; j < transactionIDs.length; j++) {
-                assertNotEquals(transactionIDs[j], transactionIDs[i]);
+                assertNotEquals("at i: " + i + ", j: " + j, transactionIDs[j], transactionIDs[i]);
             }
         }
     }

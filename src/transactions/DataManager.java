@@ -9,10 +9,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
-*  TODO: add linter
-*
-* */
 
 
 /**
@@ -23,13 +19,18 @@ public class DataManager {
 
     private final static Logger LOGGER = Logger.getLogger(DataManager.class.getName());
 
-    public String fileName;
+    private String fileName;
+    public Map<String, Person> personMap;
 
     public DataManager(String fileName) {
         LOGGER.setLevel(Level.ALL);
         LOGGER.info("Initialized logger!");
         this.fileName = fileName;
         LOGGER.info("Using file: " + this.fileName);
+        LOGGER.info("Generating personMap...");
+
+        this.personMap = createPersonMap();
+        LOGGER.info("Instantiated DataManager");
     }
 
     /**
@@ -37,7 +38,7 @@ public class DataManager {
      * @return String[] representing the header/schema/column names
      * @throws IOException when the FileReader is unable to read the specified fileName
      */
-    protected String[] getSchema() throws IOException {
+    public String[] getSchema() throws IOException {
         // Creates a buffer to read the first line of the CSV file
         BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         String[] schema = csvReader.readLine().split(",", -1);
@@ -48,6 +49,7 @@ public class DataManager {
         return schema;
     }
 
+    // TODO: ADD LOGGING
     /**
      * Gets the data in the CSV files excluding the header and puts them into a Map
      * from account numbers to a Person's data
