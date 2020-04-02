@@ -37,6 +37,7 @@ public class Person {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.transactionId = generateId();
     }
 
     public Person(String[] paramList) {
@@ -49,14 +50,7 @@ public class Person {
         this.city = paramList[6];
         this.state = paramList[7];
         this.zip = paramList[8];
-    }
-
-    public Person(Map<String, String> props) {
-        this.accountName = props.getOrDefault("Account", "");
-        this.company = props.getOrDefault("Company", "");
-        this.firstName = props.getOrDefault("FirstName", "");
-        this.lastName = props.getOrDefault("LastName", "");
-        this.address1 = props.getOrDefault("Address_1", "");
+        this.transactionId = generateId();
     }
 
     public String getAccountNumber(){
@@ -96,7 +90,7 @@ public class Person {
     }
 
     public String getTransactionId() {
-        return this.generateId();
+        return this.transactionId;
     }
 
     /**
@@ -105,10 +99,9 @@ public class Person {
      */
     private String generateId(){
         UUID uuid = UUID.randomUUID();
-        String tranId = uuid.toString();
-        tranId = tranId.replaceAll("\\-","");
-        String tranIdReturned = tranId.substring(0,24);
-        return tranIdReturned;
+        String txId = uuid.toString();
+        txId = txId.replaceAll("-","");
+        return txId.substring(0,24);
     }
 
     @Override
