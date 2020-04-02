@@ -58,35 +58,35 @@ public class Person {
     }
 
     public String getCompany(){
-        return company;
+        return this.company;
     }
 
     public String getFirstName(){
-        return firstName;
+        return this.firstName;
     }
 
     public String getLastName(){
-        return lastName;
+        return this.lastName;
     }
 
-    public String getAddress_1(){
-        return address1;
+    public String getAddress1(){
+        return this.address1;
     }
 
-    public String getAddress_2(){
-        return address2;
+    public String getAddress2(){
+        return this.address2;
     }
 
     public String getCity(){
-        return city;
+        return this.city;
     }
 
     public String getState(){
-        return state;
+        return this.state;
     }
 
     public String getZip(){
-        return zip;
+        return this.zip;
     }
 
     public String getTransactionId() {
