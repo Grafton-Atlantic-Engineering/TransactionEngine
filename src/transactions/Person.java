@@ -1,16 +1,34 @@
 package transactions;
 
-import java.util.Map;
 import java.util.UUID;
 
 /**
  * A Person is an abstraction for a bunch of details containing a Person
  */
 public class Person {
-    private String accountName, company, firstName, lastName, address1, address2, city, state, zip;
+    private String
+            accountNumber,
+            company,
+            firstName,
+            lastName,
+            address1,
+            address2,
+            city,
+            state,
+            zip,
+            transactionId;
 
-    public Person(String accountName, String company, String firstName, String lastName, String address1, String address2, String city, String state, String zip) {
-        this.accountName = accountName;
+    public Person(String accountNumber,
+                  String company,
+                  String firstName,
+                  String lastName,
+                  String address1,
+                  String address2,
+                  String city,
+                  String state,
+                  String zip
+    ) {
+        this.accountNumber = accountNumber;
         this.company = company;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,7 +40,7 @@ public class Person {
     }
 
     public Person(String[] paramList) {
-        this.accountName = paramList[0];
+        this.accountNumber = paramList[0];
         this.company = paramList[1];
         this.firstName = paramList[2];
         this.lastName = paramList[3];
@@ -41,8 +59,8 @@ public class Person {
         this.address1 = props.getOrDefault("Address_1", "");
     }
 
-    public String getAccountName(){
-        return accountName;
+    public String getAccountNumber(){
+        return this.accountNumber;
     }
 
     public String getCompany(){
@@ -95,7 +113,7 @@ public class Person {
 
     @Override
     public String toString(){
-        return ("Account: " + this.accountName + "\n" +
+        return ("Account: " + this.accountNumber + "\n" +
                     "Company: " + this.company + "\n" +
                     "First Name: " + this.firstName + "\n" +
                     "Last Name: " + this.lastName + "\n" +
