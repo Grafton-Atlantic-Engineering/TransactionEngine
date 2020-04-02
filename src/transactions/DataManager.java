@@ -9,10 +9,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
-*  TODO: add linter
-*
-* */
 
 
 /**
@@ -23,13 +19,18 @@ public class DataManager {
 
     private final static Logger LOGGER = Logger.getLogger(DataManager.class.getName());
 
-    public String fileName;
+    private String fileName;
+    public Map<String, Person> personMap;
 
     public DataManager(String fileName) {
         LOGGER.setLevel(Level.ALL);
         LOGGER.info("Initialized logger!");
         this.fileName = fileName;
         LOGGER.info("Using file: " + this.fileName);
+        LOGGER.info("Generating personMap...");
+
+        this.personMap = createPersonMap();
+        LOGGER.info("Instantiated DataManager");
     }
 
     /**
@@ -37,7 +38,7 @@ public class DataManager {
      * @return String[] representing the header/schema/column names
      * @throws IOException when the FileReader is unable to read the specified fileName
      */
-    protected String[] getSchema() throws IOException {
+    public String[] getSchema() throws IOException {
         // Creates a buffer to read the first line of the CSV file
         BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
         String[] schema = csvReader.readLine().split(",", -1);
@@ -48,34 +49,38 @@ public class DataManager {
         return schema;
     }
 
+    // TODO: ADD LOGGING
     /**
      * Gets the data in the CSV files excluding the header and puts them into a Map
      * from account numbers to a Person's data
      * @return Map<String, Person> a map of account numbers to Persons
-     * @throws IOException when the FileReader is unable to read the specified fileName
      */
-    protected Map<String, Person> getPersonMap() throws IOException {
-        // Creates a buffer to read from the file line by line
-        BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
-        // just gets the schema
-        String[] schema = csvReader.readLine().split(",", -1);
-
-
-        // Creates a map to store the relation between account number to Person
+    public Map<String, Person> createPersonMap() {
         Map<String, Person> dataMap = new HashMap<>();
-        String row;
+        try {
+            // Creates a buffer to read from the file line by line
+            BufferedReader csvReader = new BufferedReader(new FileReader(this.fileName));
+            // just gets the schema
+            String[] schema = csvReader.readLine().split(",", -1);
 
-        // Loop through whole CSV file to put all rows into a Map
-        while ((row = csvReader.readLine()) != null) {
-            // catch the empty strings
-            String[] dataRow = row.split(",", -1);
-            String accountNumber = dataRow[0];
 
-            dataMap.put(accountNumber, new Person(dataRow));
+            // Creates a map to store the relation between account number to Person
+            String row;
+
+            // Loop through whole CSV file to put all rows into a Map
+            while ((row = csvReader.readLine()) != null) {
+                // catch the empty strings
+                String[] dataRow = row.split(",", -1);
+                String accountNumber = dataRow[0];
+
+                dataMap.put(accountNumber, new Person(dataRow));
+            }
+
+            // Close CSV Reader to free up memory
+            csvReader.close();
+        } catch (IOException e) {
+            LOGGER.warning("error reading accounts from csv file: " + fileName + "\n" + e.toString());
         }
-
-        // Close CSV Reader to free up memory
-        csvReader.close();
         return dataMap;
     }
 }

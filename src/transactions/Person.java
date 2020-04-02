@@ -1,16 +1,34 @@
 package transactions;
 
-import java.util.Map;
 import java.util.UUID;
 
 /**
  * A Person is an abstraction for a bunch of details containing a Person
  */
 public class Person {
-    private String accountName, company, firstName, lastName, address1, address2, city, state, zip;
+    private String
+            accountNumber,
+            company,
+            firstName,
+            lastName,
+            address1,
+            address2,
+            city,
+            state,
+            zip,
+            transactionId;
 
-    public Person(String accountName, String company, String firstName, String lastName, String address1, String address2, String city, String state, String zip) {
-        this.accountName = accountName;
+    public Person(String accountNumber,
+                  String company,
+                  String firstName,
+                  String lastName,
+                  String address1,
+                  String address2,
+                  String city,
+                  String state,
+                  String zip
+    ) {
+        this.accountNumber = accountNumber;
         this.company = company;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,10 +37,11 @@ public class Person {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.transactionId = generateId();
     }
 
     public Person(String[] paramList) {
-        this.accountName = paramList[0];
+        this.accountNumber = paramList[0];
         this.company = paramList[1];
         this.firstName = paramList[2];
         this.lastName = paramList[3];
@@ -31,54 +50,47 @@ public class Person {
         this.city = paramList[6];
         this.state = paramList[7];
         this.zip = paramList[8];
+        this.transactionId = generateId();
     }
 
-    public Person(Map<String, String> props) {
-        this.accountName = props.getOrDefault("Account", "");
-        this.company = props.getOrDefault("Company", "");
-        this.firstName = props.getOrDefault("FirstName", "");
-        this.lastName = props.getOrDefault("LastName", "");
-        this.address1 = props.getOrDefault("Address_1", "");
-    }
-
-    public String getAccountName(){
-        return accountName;
+    public String getAccountNumber(){
+        return this.accountNumber;
     }
 
     public String getCompany(){
-        return company;
+        return this.company;
     }
 
     public String getFirstName(){
-        return firstName;
+        return this.firstName;
     }
 
     public String getLastName(){
-        return lastName;
+        return this.lastName;
     }
 
-    public String getAddress_1(){
-        return address1;
+    public String getAddress1(){
+        return this.address1;
     }
 
-    public String getAddress_2(){
-        return address2;
+    public String getAddress2(){
+        return this.address2;
     }
 
     public String getCity(){
-        return city;
+        return this.city;
     }
 
     public String getState(){
-        return state;
+        return this.state;
     }
 
     public String getZip(){
-        return zip;
+        return this.zip;
     }
 
     public String getTransactionId() {
-        return this.generateId();
+        return this.transactionId;
     }
 
     /**
@@ -87,15 +99,14 @@ public class Person {
      */
     private String generateId(){
         UUID uuid = UUID.randomUUID();
-        String tranId = uuid.toString();
-        tranId = tranId.replaceAll("\\-","");
-        String tranIdReturned = tranId.substring(0,24);
-        return tranIdReturned;
+        String txId = uuid.toString();
+        txId = txId.replaceAll("-","");
+        return txId.substring(0,24);
     }
 
     @Override
     public String toString(){
-        return ("Account: " + this.accountName + "\n" +
+        return ("Account: " + this.accountNumber + "\n" +
                     "Company: " + this.company + "\n" +
                     "First Name: " + this.firstName + "\n" +
                     "Last Name: " + this.lastName + "\n" +
