@@ -1,158 +1,122 @@
 package transactions;
 
-import java.util.Map;
 import java.util.UUID;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
+/**
+ * A Person is an abstraction for a bunch of details containing a Person
+ */
 public class Person {
-    private String AccountName, Company,FirstName,LastName,Address_1,Address_2,City,State,Zip,TransactionID;
+    private String
+            accountNumber,
+            company,
+            firstName,
+            lastName,
+            address1,
+            address2,
+            city,
+            state,
+            zip,
+            transactionId;
 
-    public Person(String AccountName, String Company, String FirstName, String LastName, String Address_1, String Address_2, String City, String State, String Zip) throws NoSuchAlgorithmException {
-        this.AccountName = AccountName;
-        this.Company = Company;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Address_1 = Address_1;
-        this.Address_2 = Address_2;
-        this.City = City;
-        this.State = State;
-        this.Zip = Zip;
-        this.TransactionID = generateId();
+    public Person(String accountNumber,
+                  String company,
+                  String firstName,
+                  String lastName,
+                  String address1,
+                  String address2,
+                  String city,
+                  String state,
+                  String zip
+    ) {
+        this.accountNumber = accountNumber;
+        this.company = company;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.transactionId = generateId();
     }
 
     public Person(String[] paramList) {
-        this.AccountName = paramList[0];
-        this.Company = paramList[1];
-        this.FirstName = paramList[2];
-        this.LastName = paramList[3];
-        this.Address_1 = paramList[4];
-        this.Address_2 = paramList[5];
-        this.City = paramList[6];
-        this.State = paramList[7];
-        this.Zip = paramList[8];
-        this.TransactionID = generateId();
+        this.accountNumber = paramList[0];
+        this.company = paramList[1];
+        this.firstName = paramList[2];
+        this.lastName = paramList[3];
+        this.address1 = paramList[4];
+        this.address2 = paramList[5];
+        this.city = paramList[6];
+        this.state = paramList[7];
+        this.zip = paramList[8];
+        this.transactionId = generateId();
     }
 
-    public Person(Map<String, String> props) {
-        this.AccountName = props.getOrDefault("Account", "");
-        this.Company = props.getOrDefault("Company", "");
-        this.FirstName = props.getOrDefault("FirstName", "");
-        this.LastName = props.getOrDefault("LastName", "");
-        this.Address_1 = props.getOrDefault("Address_1", "");
-    }
-
-    public String getAccountName(){
-        return AccountName;
-    }
-
-    public void setAccountName(String accountName){
-        AccountName = accountName;
+    public String getAccountNumber(){
+        return this.accountNumber;
     }
 
     public String getCompany(){
-        return Company;
-    }
-
-    public void setCompany(String company){
-        Company = company;
+        return this.company;
     }
 
     public String getFirstName(){
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName){
-        FirstName = firstName;
+        return this.firstName;
     }
 
     public String getLastName(){
-        return LastName;
+        return this.lastName;
     }
 
-    public void setLastName(String lastName){
-        LastName = lastName;
+    public String getAddress1(){
+        return this.address1;
     }
 
-    public String getAddress_1(){
-        return Address_1;
-    }
-
-    public void setAddress_1(String address_1){
-        Address_1 = address_1;
-    }
-
-    public String getAddress_2(){
-        return Address_2;
-    }
-
-    public void setAddress_2(String address2){
-        Address_2 = address2;
+    public String getAddress2(){
+        return this.address2;
     }
 
     public String getCity(){
-        return City;
-    }
-
-    public void setCity(String city){
-        City = city;
+        return this.city;
     }
 
     public String getState(){
-        return State;
-    }
-
-    public void setState(String state){
-        State = state;
+        return this.state;
     }
 
     public String getZip(){
-        return Zip;
+        return this.zip;
     }
 
-    public void setZip(String zip){
-        Zip = zip;
+    public String getTransactionId() {
+        return this.transactionId;
     }
 
-    // creates txid by hashing attributes with sha1
-    private String generateId() {
+    /**
+     * Generate's a unique 24 digit alphanumeric transaction ID for this Person
+     * @return String which is a 24 digit alphanumeric transaction ID
+     */
+    private String generateId(){
         UUID uuid = UUID.randomUUID();
-        String txid = null;
-        try {
-            txid = sha1(String.join("",
-                    this.AccountName, this.Company, this.FirstName, this.LastName,
-                    this.Address_1, this.Address_2, this.City, this.State, this.Zip,
-                    uuid.toString()
-            ));
-        } catch (NoSuchAlgorithmException e) {
-            return null;
-        }
-        return txid.substring(0, 24);
+        String txId = uuid.toString();
+        txId = txId.replaceAll("-","");
+        return txId.substring(0,24);
     }
 
+    @Override
     public String toString(){
-        return(
-                "Account: " + AccountName + "\n" +
-                        "Company: " + Company + "\n" +
-                        "First Name: " + FirstName + "\n" +
-                        "Last Name: " + LastName + "\n" +
-                        "Address 1: " + Address_1 + "\n" +
-                        "Address 2: " + Address_2 + "\n" +
-                        "City: " + City + "\n" +
-                        "State: " + State + "\n" +
-                        "Zip: " + Zip + "\n" +
-                        "TransactionID: " + TransactionID + "\n"
+        return ("Account: " + this.accountNumber + "\n" +
+                    "Company: " + this.company + "\n" +
+                    "First Name: " + this.firstName + "\n" +
+                    "Last Name: " + this.lastName + "\n" +
+                    "Address 1: " + this.address1 + "\n" +
+                    "Address 2: " + this.address2 + "\n" +
+                    "City: " + this.city + "\n" +
+                    "State: " + this.state + "\n" +
+                    "Zip: " + this.zip + "\n" +
+                    "Transaction ID: " + this.getTransactionId() + "\n"
         );
-    }
-
-    private static String sha1(String input) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA1");
-        byte[] byteDigest = digest.digest(input.getBytes());
-        StringBuffer buffer = new StringBuffer();
-        for (byte b : byteDigest) {
-            buffer.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-        }
-        return buffer.toString();
     }
 }
 
