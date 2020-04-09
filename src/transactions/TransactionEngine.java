@@ -2,19 +2,22 @@ package transactions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionEngine implements ITransactionEngine {
 
-    private DataManager dataManager;
+    private Map<String, Person> customerMap;
 
     public TransactionEngine(String filename) {
-        this.dataManager = new DataManager(filename);
+        // DataManager gets all Person data from the CSV provided
+        DataManager customerData = new DataManager(filename);
+        this.customerMap = customerData.getPersonMap();
     }
 
     @Override
     public List<String> getAllCustomerTransactionIDs() {
         List<String> customerIds = new ArrayList<String>();
-        for (Person p: dataManager.personMap.values()) {
+        for (Person p: this.customerMap.values()) {
             customerIds.add(p.getTransactionId());
         }
         return customerIds;
