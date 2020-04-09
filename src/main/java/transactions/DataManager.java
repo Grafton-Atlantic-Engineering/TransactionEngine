@@ -19,7 +19,7 @@ public class DataManager {
     private final static Logger LOGGER = Logger.getLogger(DataManager.class.getName());
 
     private String fileName;
-    public Map<String, Person> personMap;
+    private Map<String, Person> personMap;
 
     public DataManager(String fileName) {
         LOGGER.setLevel(Level.ALL);
@@ -54,7 +54,7 @@ public class DataManager {
      * from account numbers to a Person's data
      * @return Map<String, Person> a map of account numbers to Persons
      */
-    public Map<String, Person> createPersonMap() {
+    private Map<String, Person> createPersonMap() {
         Map<String, Person> dataMap = new HashMap<>();
         try {
             // Creates a buffer to read from the file line by line
@@ -81,5 +81,9 @@ public class DataManager {
             LOGGER.warning("error reading accounts from csv file: " + fileName + "\n" + e.toString());
         }
         return dataMap;
+    }
+
+    public Map<String, Person> getPersonMap() {
+        return this.personMap;
     }
 }
