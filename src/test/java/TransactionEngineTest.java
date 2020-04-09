@@ -1,8 +1,9 @@
-package transactions;
 import java.io.IOException;
 import java.util.Map;
 import java.io.File;
 import org.junit.Test;
+import transactions.Person;
+
 import static org.junit.Assert.*;
 
 /**

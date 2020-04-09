@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
 /**
  * DataManager is used to get values from the CSV file and map them
  * to account numbers
