@@ -25,6 +25,11 @@ public class TransactionEngine implements ITransactionEngine {
 
     @Override
     public String getCustomerTransactionID(String accountNumber) {
-        return dataManager.personMap.get(accountNumber).getTransactionId();
+        // if-else for this since we aren't playing code golf
+        if (this.customerMap.containsKey(accountNumber)) {
+            return this.customerMap.get(accountNumber).getTransactionId();
+        } else {
+            return null;
+        }
     }
 }

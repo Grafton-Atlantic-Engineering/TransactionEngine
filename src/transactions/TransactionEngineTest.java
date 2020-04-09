@@ -102,6 +102,7 @@ public class TransactionEngineTest {
         assertNotNull(transactions.getCustomerTransactionID("abc123"));
         assertNotNull(transactions.getCustomerTransactionID("success789"));
         assertNotNull(transactions.getCustomerTransactionID("147846894"));
+        assertNull(transactions.getCustomerTransactionID("nonexistent-account"));
     }
 
 }
