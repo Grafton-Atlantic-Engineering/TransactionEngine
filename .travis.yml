@@ -5,3 +5,12 @@ dist: xenial
 jdk:
   - oraclejdk11
   - oraclejdk12
+
+jobs:
+  include:
+  - name: "Unit-Tests on Oracle JDK 11"
+    jdk: oraclejdk11
+  - name: "Unit-Tests on Oracle JDK 12"
+    jdk: oraclejdk12
+
+script: gradle :test
