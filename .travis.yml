@@ -1,0 +1,8 @@
+language: java
+# use ubuntu 16
+dist: xenial
+
+jdk:
+  - oraclejdk11
+  - oraclejdk12
+  - oraclejdk13
