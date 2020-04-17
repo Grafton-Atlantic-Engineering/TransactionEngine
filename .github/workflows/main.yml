@@ -25,9 +25,5 @@ jobs:
     - run: mkdir -p temp
     - name: Compile Project
       run: javac -verbose -cp ".:java:lib/junit.jar:" -d temp src/transactions/*.java
-    - name: Run Unit Tests
-      run: java -cp ".:java:lib/junit.jar:temp/:" transactions.TestRunner
-    - name: Run Tests Directly with JUnit4
+    - name: Run JUnit Tests
       run: java -cp ".:java:lib/junit.jar:temp/:" org.junit.runner.JUnitCore transactions.TransactionEngineTest
-    - name: Run Tests Directly with JUnit4 x2
-      run: java -cp ".:java:lib/junit.jar:temp/:"  transactions.TransactionEngineTest
