@@ -24,4 +24,4 @@ jobs:
       with:
         # saving file to lib/ directory
         args: -O lib/junit.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.6.2/junit-platform-console-standalone-1.6.2.jar
-    - run: java -cp java transactions.TestRunner
+    - run: java -cp java transactions.TransactionEngineTest
