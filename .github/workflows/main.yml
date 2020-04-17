@@ -14,8 +14,12 @@ jobs:
         java-version: '9.0.4' # The JDK version to make available on the path.
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
+    # create lib/ directory
+    - run: mkdir -p lib/
+    # fetch jar file for junit
     - name: wget
       uses: wei/wget@v1
       with:
+        # saving file to lib/ directory
         args: -O lib/junit.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.6.2/junit-platform-console-standalone-1.6.2.jar
     - run: java -cp java transactions.TestRunner
