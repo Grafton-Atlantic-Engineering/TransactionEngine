@@ -23,5 +23,9 @@ jobs:
         # saving file to lib/ directory
         args: -O lib/junit.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.6.2/junit-platform-console-standalone-1.6.2.jar
     - run: mkdir -p temp
-    - run: javac -verbose -cp ".:java:lib/junit.jar:" -d temp src/transactions/*.java
-    - run: java -cp ".:java:lib/junit.jar:temp/:" transactions.TestRunner
+    - name: Compile Project
+      run: javac -verbose -cp ".:java:lib/junit.jar:" -d temp src/transactions/*.java
+    - name: Run Unit Tests
+      run: java -cp ".:java:lib/junit.jar:temp/:" transactions.TestRunner
+    - name: Run Tests Directly with JUnit4
+      run: java -cp ".:java:lib/junit.jar:temp/:" -junit4 transactions.TransactionEngineTest
