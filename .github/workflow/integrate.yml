@@ -1,8 +1,6 @@
 name: Java Continuous Integration
 
-on:
-  pull_request:
-    branches: [ master ]
+on: [ push, pull_request ]
 
 jobs:
   test_pull_request:
