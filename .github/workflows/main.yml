@@ -28,4 +28,6 @@ jobs:
     - name: Run Unit Tests
       run: java -cp ".:java:lib/junit.jar:temp/:" transactions.TestRunner
     - name: Run Tests Directly with JUnit4
-      run: java -cp ".:java:lib/junit.jar:temp/:" transactions.TransactionEngineTest
+      run: java -cp ".:java:lib/junit.jar:temp/:" org.junit.runner.JUnitCore transactions.TransactionEngineTest
+    - name: Run Tests Directly with JUnit4 x2
+      run: java -cp ".:java:lib/junit.jar:temp/:"  transactions.TransactionEngineTest
