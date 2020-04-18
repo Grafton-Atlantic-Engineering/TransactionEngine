@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>transactions</OriginalElement>
+  <nodes>
+    <node x="-5.5" y="444.5">transactions.TransactionEngineTest</node>
+    <node x="437.0" y="443.5">transactions.DataManager</node>
+    <node x="274.0" y="-12.5">transactions.TransactionEngine</node>
+    <node x="-9.0" y="652.5">transactions.TestRunner</node>
+    <node x="274.0" y="160.0">transactions.ITransactionEngine</node>
+    <node x="-14.5" y="0.0">transactions.Person</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="transactions.TransactionEngine" target="transactions.ITransactionEngine">
+      <point x="0.0" y="52.5" />
+      <point x="0.0" y="-40.0" />
+    </edge>
+  </edges>
+  <settings layout="Directed Orthogonal" zoom="0.8505422993492406" x="693.005476951164" y="399.910771337289" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
