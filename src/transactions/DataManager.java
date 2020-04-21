@@ -49,7 +49,6 @@ public class DataManager {
         return schema;
     }
 
-    // TODO: ADD LOGGING
     /**
      * Gets the data in the CSV files excluding the header and puts them into a Map
      * from account numbers to a Person's data
@@ -78,6 +77,7 @@ public class DataManager {
 
             // Close CSV Reader to free up memory
             csvReader.close();
+            LOGGER.info("Successfully created person map");
         } catch (IOException e) {
             LOGGER.warning("error reading accounts from csv file: " + fileName + "\n" + e.toString());
         }
