@@ -44,7 +44,7 @@ public class TransactionEngineTest {
     public void testUniquenessAndDigits() {
         //here I will generate 1000 transaction IDs for a Person object and store them in an array to make sure the
             //transaction IDs are all 24 digits, are alpha numeric, and are all unique
-        String[] transactionIDs = new String[1000];
+        String[] transactionIDs = new String[999999];
         for(int i = 0; i < transactionIDs.length; i++) {
             //we recreated this Person object inside the for loop so a new transaction ID would be generated each time
             Person person2 = new Person("0000000011", "Hogwarts", "Ron", "Weesley", "4 Wizard Way", null, "London", null, null);
