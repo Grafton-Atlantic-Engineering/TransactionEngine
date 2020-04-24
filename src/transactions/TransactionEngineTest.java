@@ -4,6 +4,7 @@ import java.util.Map;
 import java.io.File;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.*;
 
 /**
  * TransactionEngineTest is used to test both the generateID() method in the Person
@@ -13,6 +14,7 @@ import static org.junit.Assert.*;
  * by making sure that the transaction IDs are created for the given file or input
  */
 public class TransactionEngineTest {
+    
     @Test
     public void testTransactionGenerator() {
         //create a few Person objects to use while testing
@@ -38,26 +40,34 @@ public class TransactionEngineTest {
         assertNotNull(person4.getTransactionId());
         assertNotNull(person5.getTransactionId());
         assertNotNull(person6.getTransactionId());
+        
+        // test to make sure that .getTransactionId is the same each time
+        Person person = new Person("01721aefdeesfe", "   ", null, "Parker", "", null, "Miami", "Florida", "");
+        String txid = person.getTransactionId();
+        for(int i = 0; i < 100; i++) {
+            assertEquals(txid, person.getTransactionId());
+        }
     }
 
     @Test
     public void testUniquenessAndDigits() {
-        //here I will generate 1000 transaction IDs for a Person object and store them in an array to make sure the
-            //transaction IDs are all 24 digits, are alpha numeric, and are all unique
-        String[] transactionIDs = new String[1000];
-        for(int i = 0; i < transactionIDs.length; i++) {
+        // create a ton of person objects and place all their transaction IDs into a set to make sure they're all unique
+        int poolSize = 999999;
+        Set<String> transactionIDs = new HashSet<String>();
+        Person person;
+        String txid;
+        
+        for(int i = 0; i < poolSize; i++) {
             //we recreated this Person object inside the for loop so a new transaction ID would be generated each time
-            Person person2 = new Person("0000000011", "Hogwarts", "Ron", "Weesley", "4 Wizard Way", null, "London", null, null);
-            transactionIDs[i] = person2.getTransactionId();
+            person = new Person("0000000011", "Google", "Microsoft", "Ken", "Tubman", null, "London", null, null);
+            txid = person.getTransactionId();
+            assertFalse(transactionIDs.contains(txid));
+            transactionIDs.add(txid);
+            assertTrue(transactionIDs.contains(txid));
         }
-        for(int i = 0; i < transactionIDs.length; i++) {
-            //this checks to see if the transactionID at index i is exactly 24 digits with alpha numeric characters
-            assertTrue((transactionIDs[i].matches("[a-zA-Z0-9]{24}")));
-            //now check to see if all the transaction IDs are unique by comparing them to each other
-            for(int j = i + 1; j < transactionIDs.length; j++) {
-                assertNotEquals("at i: " + i + ", j: " + j, transactionIDs[j], transactionIDs[i]);
-            }
-        }
+        
+        // make sure all 50,000 txids are in here 
+        assertEquals(transactionIDs.size(), poolSize);
     }
     //Now I will test the createPersonMap() methods in the DataManager class by creating a csv file
         //with a few Person objects in it then create a DataManager class and make sure that a Person map is created
