@@ -2,4 +2,4 @@
 
 ![Java Continuous Integration](https://github.com/Grafton-Atlantic-Engineering/TransactionEngine/workflows/Java%20Continuous%20Integration/badge.svg?branch=master)
 
-lorem ipsum blah blah blah
+A program that generates a 24 alphanumeric character transaction ID
