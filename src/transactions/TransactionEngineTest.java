@@ -52,7 +52,7 @@ public class TransactionEngineTest {
     @Test
     public void testUniquenessAndDigits() {
         // create a ton of person objects and place all their transaction IDs into a set to make sure they're all unique
-        int poolSize = 50000;
+        int poolSize = 999999;
         Set<String> transactionIDs = new HashSet<String>();
         Person person;
         String txid;
