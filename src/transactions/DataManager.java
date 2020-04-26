@@ -84,6 +84,9 @@ public class DataManager {
         return dataMap;
     }
 
+    /** Retrieves the newly created personMap hashmap
+     * @return
+     */
     public Map<String, Person> getPersonMap() {
         return this.personMap;
     }

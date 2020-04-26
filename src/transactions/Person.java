@@ -53,42 +53,72 @@ public class Person {
         this.transactionId = generateId();
     }
 
+    /** Gets the Account Number
+     * @return String
+     */
     public String getAccountNumber(){
         return this.accountNumber;
     }
 
+    /** Gets the Company associated with the Person Object
+     * @return String
+     */
     public String getCompany(){
         return this.company;
     }
 
+    /** Gets the First name for the object
+     * @return String
+     */
     public String getFirstName(){
         return this.firstName;
     }
 
+    /**
+     * @return String Retrieves the Last Name Associated with the Object
+     */
     public String getLastName(){
         return this.lastName;
     }
 
+    /**
+     * @return  String First Address associated with the object
+     */
     public String getAddress1(){
         return this.address1;
     }
 
+    /**
+     * @return  String Second Address associated with the object
+     */
     public String getAddress2(){
         return this.address2;
     }
 
+    /**
+     * @return the city associated with the object
+     */
     public String getCity(){
         return this.city;
     }
 
+    /**
+     * @return String - State associated with the Object
+     */
     public String getState(){
         return this.state;
     }
 
+    /**
+     * @return String - ZipCode Associated with the Object
+     */
     public String getZip(){
         return this.zip;
     }
 
+    /**
+     * @return String - Returns the transactionID associated with the Object.
+     */
     public String getTransactionId() {
         return this.transactionId;
     }
@@ -104,6 +134,9 @@ public class Person {
         return txId.substring(0,24);
     }
 
+    /**
+     * @return String - All information belonging to the particular person object.
+     */
     @Override
     public String toString(){
         return ("Account: " + this.accountNumber + "\n" +
