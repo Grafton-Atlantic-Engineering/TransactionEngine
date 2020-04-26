@@ -3,10 +3,14 @@ package transactions;
 
 import java.util.List;
 
-// This was the requirements he mentioned in class on 3/11/20
+
+/**
+ * ITransactionEngine
+ * Interface that TransactionEngine will implement,
+ * Necessary functions that need to be implemented are getAllCustomerTransactionIDs and getCustomerTransactionID
+ */
 public interface ITransactionEngine {
 
-    // Need I say more
     List<String> getAllCustomerTransactionIDs();
 
 
