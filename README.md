@@ -16,13 +16,13 @@ Clone the project into a repository and add
 `TransactionEngine/src/transactions` to your class path
 
 ```java 
-	 TransactionEngine transactions = new TransactionEngine("customers.csv");
+TransactionEngine transactions = new TransactionEngine("customers.csv");
 
-	 // to get all transaction IDs
-	 List<String> txids = transactions.getAllCustomerTransactionIDs();
+// to get all transaction IDs
+List<String> txids = transactions.getAllCustomerTransactionIDs();
 
-	 // get a specific transaction ID 
-	 String txid = transactions.getCustomerTransactionID("12345");
+// get a specific transaction ID 
+String txid = transactions.getCustomerTransactionID("12345");
 ```
 
 ## Contributing 
