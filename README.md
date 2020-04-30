@@ -1,6 +1,7 @@
 # TransactionEngine
 
-![Java Continuous Integration](https://github.com/Grafton-Atlantic-Engineering/TransactionEngine/workflows/Java%20Continuous%20Integration/badge.svg?branch=master)
+![Java Continuous Integration](https://github.com/Grafton-Atlantic-Engineering/TransactionEngine/workflows/Java%20Continuous%20Integration/badge.svg?branch=master) 
+
 [Github Repo](https://github.com/Grafton-Atlantic-Engineering/TransactionEngine)
 
 TransactionEngine is a class suite which parses a CSV file of customers, 
